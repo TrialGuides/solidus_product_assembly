@@ -146,9 +146,10 @@ RSpec.feature "Managing parts for a product bundle", type: :feature, js: true do
       within("#product_parts") do
         fill_in "count", with: "5"
         find(".set_count_admin_product_part_link").click
-
         expect(find_field('count').value).to eq "5"
       end
+      # sleep inserted to avoid DatabaseCleaner SQLite3::BusyException
+      sleep(1)
     end
 
     scenario "rejects a negative quantity" do

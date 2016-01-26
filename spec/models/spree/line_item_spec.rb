@@ -19,11 +19,16 @@ module Spree
           expect(part).not_to be_in_stock
         end
 
-        it "doesn't save line item quantity" do
-          expect { order.contents.add(variant, 10) }.to(
-            raise_error ActiveRecord::RecordInvalid
-          )
-        end
+        # Solidus allows a line item to be created for
+        # an out-of-stock variant so this test is irrelevant
+        # and will always fail; the error now occurs at checkout
+        # Checkout test needs to be added (as of 1/22/2016)
+        #
+        # it "doesn't save line item quantity" do
+        #   expect { order.contents.add(variant, 10) }.to(
+        #     raise_error ActiveRecord::RecordInvalid
+        #   )
+        # end
       end
 
       context "in stock" do
@@ -34,6 +39,11 @@ module Spree
           expect(parts[0]).to be_in_stock
           expect(parts[1]).to be_in_stock
         end
+
+        # Solidus allows a line item to be created for
+        # an out-of-stock variant so this test will always pass;
+        # the error now occurs at checkout
+        # Checkout test needs to be added (as of 1/22/2016)
 
         it "saves line item quantity" do
           line_item = order.contents.add(variant, 10)

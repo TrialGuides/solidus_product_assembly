@@ -13,27 +13,31 @@ RSpec.feature "Orders", type: :feature, js: true do
     order.finalize!
   end
 
-  scenario "allows admin to edit product bundle" do
-    visit spree.edit_admin_order_path(order)
+  # The edit functionality in solidus_product_assembly has been deleted
+  # to match how solidus has deleted the functionality
+  # The delete functionality is still broken (as of 1/26/2016)
 
-    within("table.product-bundles") do
-      find(".edit-line-item").click
-      fill_in "quantity", with: 2
-      find(".save-line-item").click
-    end
+  # scenario "allows admin to edit product bundle" do
+  #   visit spree.edit_admin_order_path(order)
 
-    wait_for_ajax
+  #   within("table.product-bundles") do
+  #     find(".edit-line-item").click
+  #     fill_in "quantity", with: 2
+  #     find(".save-line-item").click
+  #   end
 
-    visit spree.edit_admin_order_path(order)
+  #   wait_for_ajax
 
-    within("table.stock-contents") do
-      stock_quantities = all(".item-qty-show").map(&:text)
+  #   visit spree.edit_admin_order_path(order)
 
-      expect(stock_quantities).to match [
-        "2 x backordered",
-        "2 x backordered",
-        "2 x backordered"
-      ]
-    end
-  end
+  #   within("table.stock-contents") do
+  #     stock_quantities = all(".item-qty-show").map(&:text)
+
+  #     expect(stock_quantities).to match [
+  #       "2 x backordered",
+  #       "2 x backordered",
+  #       "2 x backordered"
+  #     ]
+  #   end
+  # end
 end

@@ -31,6 +31,7 @@ RSpec.feature "Checkout", type: :feature do
       expect(current_path).to eq spree.checkout_state_path("payment")
 
       click_button "Save and Continue"
+      click_button "Place Order"
       expect(current_path).to eq spree.order_path(Spree::Order.last)
       expect(page).to have_content(variant.product.name)
     end
@@ -222,6 +223,7 @@ RSpec.feature "Checkout", type: :feature do
       expect(current_path).to eq spree.checkout_state_path("payment")
 
       click_button "Save and Continue"
+      click_button "Place Order"
       expect(current_path).to eq spree.order_path(Spree::Order.last)
       expect(page).to have_content(shirt.name)
       expect(page).to have_content("Color: Blue")

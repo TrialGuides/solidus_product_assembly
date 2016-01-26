@@ -1,8 +1,6 @@
 <%- content_for :javascript do %>
-  <%= javascript_tag "backend/spree_product_assembly" %>
+  <%= javascript_tag "backend/solidus_product_assembly" %>
 <%- end %>
-
-<%= render :partial => 'spree/admin/shared/product_sub_menu' %>
 
 <%= render :partial => 'spree/admin/shared/product_tabs', :locals => {:current => "Parts"} %>
 <div id="product_parts" data-product-slug="<%= product.slug %>">
